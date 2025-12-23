@@ -1,27 +1,23 @@
-# ---- NIXPACKS CONFIG FOR FULLSTACK RAILWAY DEPLOY ----
-# This builds the client, then starts the server.
+[variables]
+NODE_ENV = "production"
 
 [phases.setup]
-apt_pkgs = ["nodejs", "npm"]
+# Install Node via Nix
+nixPkgs = ["nodejs"]
 
 [phases.install]
-# Install backend deps
+# Install deps for server and client
 cmds = [
   "cd server && npm install",
-  # Install frontend deps
-  "cd ../client && npm install"
+  "cd client && npm install"
 ]
 
 [phases.build]
-# Build the React app
+# Build the React client
 cmds = [
   "cd client && npm run build"
 ]
 
-[phases.start]
-# Start the Express server
-cmd = "node server/index.js"
-
-[environment]
-NODE_ENV = "production"
-PORT = "3000"
+[start]
+# Start the Express server (which serves the built client)
+cmd = "cd server && node index.js"
