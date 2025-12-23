@@ -360,7 +360,7 @@ const clientDistPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDistPath));
 
 // Fallback: for any non-API route, send index.html (let React Router handle it)
-app.get("/*", (req, res) => {
+app.get(/.*/, (req, res) => {
   if (req.path.startsWith("/api")) {
     return res.status(404).json({ error: "Not found" });
   }
