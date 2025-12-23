@@ -264,12 +264,9 @@ function App() {
         <section className="hero hero--terminal">
           <div className="hero-header-row">
             <div>
-              <p className="hero-label">BUYLIST TERMINAL</p>
-              <h1>Type a card once, scan every counterparty.</h1>
+              <h1>Pick Your Game, Search for a Card.</h1>
               <p className="hero-subtext">
-                Live buylist prices across all connected stores, grouped by
-                actual card so Shiny Vault, promos, and alt arts don&apos;t
-                clutter the screen.
+                Live Storepass Buylist Prices, some cards may not group together.
               </p>
             </div>
           </div>
