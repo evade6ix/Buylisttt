@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -346,6 +348,24 @@ app.get("/api/test", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+// ---------------------- Serve React build ----------------------
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Path to Vite build output
+const clientDistPath = path.join(__dirname, "..", "client", "dist");
+
+// Serve static files from the React app
+app.use(express.static(clientDistPath));
+
+// Fallback: for any non-API route, send index.html (let React Router handle it)
+app.get("*", (req, res) => {
+  if (req.path.startsWith("/api")) {
+    return res.status(404).json({ error: "Not found" });
+  }
+
+  res.sendFile(path.join(clientDistPath, "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;
