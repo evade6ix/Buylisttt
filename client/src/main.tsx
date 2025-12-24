@@ -2,7 +2,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { MantineProvider } from "@mantine/core";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
+import Landing from "./Landing";
 import "./index.css";
 import "./App.css";
 
@@ -11,7 +13,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <MantineProvider
       defaultColorScheme="dark"
       theme={{
-        fontFamily: "Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+        fontFamily:
+          "Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
         colors: {
           brand: [
             "#e0f2fe",
@@ -31,7 +34,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         defaultRadius: "md",
       }}
     >
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/app" element={<App />} />
+        </Routes>
+      </BrowserRouter>
     </MantineProvider>
   </React.StrictMode>
 );
